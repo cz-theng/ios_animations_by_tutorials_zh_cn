@@ -134,3 +134,103 @@
 ###外观
 
 ![chapter1_10](./images/chapter1_10.png)
+
+你可以通过修改背景或者设置半透明来改变view的外观。
+
+* *backgroundColor*: 通过修改view的这个属性，可以随着时间的增长逐渐修改背景的色彩
+* *alpah*：通过修改这个属性，可以实现淡入和淡出的效果
+
+###变形
+![chapter1_11](./images/chapter1_11.png)
+
+变形和上面一样通过需改view的大小和位置来改变了view的形状。
+* *transform*: 在animation的block中修改这个属性，可以展现view的旋转、缩放动画。  
+
+这样通过修改缩放因子或者旋转角度就可以实现高效的修改view的形状而不用通过修改view的中心点和外框大小。
+
+这些看起像是很基本的动画组成部分，但是你将会被他们实现的效果所震撼。
+
+##动画选项
+回头再看上面的代码，对于options参数都是传递“[]”表示没有选项。
+
+options让你可以自定义UIKit创建动画的属性。上面已经通过delay和duration来设置动画的表现效果，除此之外还可以通过这个options更多的控制动画的表现。`UIViewAnimationOptions`罗列了所有的option，可以通过组合这些option来控制动画。
+
+###重复
+首先来下面的两个动画选项：
+* *.Repeat*： 这个选项可以设置动画反复不停的播放
+* *.Autoreverse*: 这个选项和`.Reapeat`进行组合，可以实现动画先正向播放然后在方向播放反复的播放
+
+通过增加`.Repeat`修改之前 `viewDidAppear()`里面的代码：
+
+	UIView.animateWithDuration(0.5, delay: 0.4, options: .Repeat, animations: { 
+		self.password.center.x += self.view.bounds.width	}, completion: nil)
+构建并运行查看新增的效果：
+![chapter1_12](./images/chapter1_12.png)
+
+表单的标签和"username"输入框飞入并最终安定到屏幕的中心，但是“password”输入框则不停的播放从外面飞入屏幕的动画。
+
+再次修改上面的代码并加入".Repeat"和".Autoreverse"到options参数：
+
+	UIView.animateWithDuration(0.5, delay: 0.4, options: [.Repeat, .Autoreverse], animations: {
+			self.password.center.x += self.view.bounds.width 
+	}, completion: nil)
+	
+如果想组合多个option，可以通过将各个option通过逗号组合并放到中括号括起来，然后传递给options参数。
+
+>> 注意： 如果只设置一个option，Swift语法中，可以省略外面的中括号。然后你也可以不省略，从而暗示以后可能
+增加的内容。这样，通过`[]`表示没有option,`[.Reapeat]`表示单个option,`[.Repeat, .Autorepeat]`表示多个option。
+
+再次构建和运行，这次"password"输入框会进入退出反复的播放。
+
+### 缓动动画
+在真实生活中，东西不会突然开始或者停止运动，类似汽车、火车等物理对象都是慢慢的加速到目标速度，然后再缓缓的减速到完全停止，除非撞墙了才会立即停止下来。
+
+下面的图描述了或者从启动到到达目的的过程：
+
+![chapter1_13](./images/chapter1_13.png)
+
+为了让你的动画更真实，你可以构建同样的缓慢启动和缓慢停下来的效果，或者叫术语中的"ease-in"和“ease-out”.
+
+总共有四种缓动效果：
+
+* *.Linear*：这个选项适用于没有加速度的动画，目前只有第三章的内容需要用这个效果
+* *.CurveEaseIn*: 这个选项适用于开始时的加速动画
+* *.CurveEaseOut*: 这个选项使用与结束时的减速动画
+* *.CurveEaseInOut*:这个选项组合了上面的加速动画和简书动画
+
+为了能更好的理解这些选项的效果，可以在上面的工程代码中添加这些选项，来看效果。
+
+为上面的"password"输入框添加一个新的option：
+
+	UIView.animateWithDuration(0.5, delay: 0.4,	options: [.Repeat, .Autoreverse, .CurveEaseOut], animations: {			self.password.center.x += self.view.bounds.width 
+		}, completion: nil)
+	
+创建并运行，注意观察“password”输入框在进入后的慢慢退出屏幕的效果。
+
+![chapter1_14](./images/chapter1_14)
+增加了这个效果以后，整个动画看上去就更真实生动了。
+
+现在来看与之相反的ease-in效果，通过将上面的代码中的.CurveEaseOut替换成.CurveEaseIn如下所示：
+
+	UIView.animateWithDuration(0.5, delay: 0.4,	options: [.Repeat, .Autoreverse, .CurveEaseIn], animations: {
+				self.password.center.x += self.view.bounds.width 
+		}, completion: nil)
+
+构建并运行，观察其如何机械的从最右边跳回去。这样依旧有点有点不自然并且也没有之前的好看。
+
+最后使用.CurveEaseInOut： 组合了上面两钟效果产生的更自然的缓动效果，修改后尝试下。同事.CurveEaseInOut也是UIKit默认的动画选项。
+
+在继续之前，将options修改成原来的`[]`：
+
+	UIView.animateWithDuration(0.5, delay: 0.4, options: [], animations: {
+			self.password.center.x += self.view.bounds.width 
+		}, completion: nil)
+
+现在你已经了解了最基本的动画工作方式，已经准备好去学习更复杂的动画效果。
+
+从A点到B点的动画如何实现？ 是不是非常简单呢？
+
+下一章，你讲学院怎样让你的动画拥有弹簧效果。
+
+## 习题
+	
