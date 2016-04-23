@@ -6,13 +6,13 @@
 
 动画可以用在可见的、带有银幕效果的View或者是你的界面上的其他可见对象:
 
-![readme_01](./readme_01.png)
+![readme_01](./images/readme_01.png)
 
 因此，你可以让所有最终继承与UIView的对象动起来；包括有UILabel, UIImageView, UIButton或者其他你自己实现的继承与UIView的对象。
 
 在这部分的五个关于View动画的章节中，将会教会你如何用动画装饰一个虚构的航空App ： “Bahama Air”。为了给UI组件添加各种动画，首先我们从登陆界面开始增加动画效果：
 
-![readme_02](readme_02.png)
+![readme_02](./images/readme_02.png)
 
 在下面的这几章，我们主要实现这些效果：
 
@@ -24,7 +24,7 @@
 
 当你完成了登录界面的工作后，就可以开始做"Bahama Air"的飞行状态界面了。在此之前需要添加动画效果让登录界面退出的效果变得更精彩：
 
-![readme_03](readme_03.png)
+![readme_03](./images/readme_03.png)
 
 首先你需要在屏幕完成一个静态界面，然后增加一系列的精彩的、高级动画来提高用户体验。
 
