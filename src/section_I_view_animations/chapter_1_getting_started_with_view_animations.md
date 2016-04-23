@@ -207,7 +207,7 @@ options让你可以自定义UIKit创建动画的属性。上面已经通过delay
 	
 创建并运行，注意观察“password”输入框在进入后的慢慢退出屏幕的效果。
 
-![chapter1_14](./images/chapter1_14)
+![chapter1_14](./images/chapter1_14.png)
 增加了这个效果以后，整个动画看上去就更真实生动了。
 
 现在来看与之相反的ease-in效果，通过将上面的代码中的.CurveEaseOut替换成.CurveEaseIn如下所示：
@@ -233,4 +233,28 @@ options让你可以自定义UIKit创建动画的属性。上面已经通过delay
 下一章，你讲学院怎样让你的动画拥有弹簧效果。
 
 ## 习题
-	
+如果这章是你第一次在iOS上实现动画效果，你可能有点晕乎。别担心，不论你的基础怎样，接着后面几章会慢慢变的清晰。
+
+一路走到这，我们准备了一个非常简单的习题，通过完成这个习题，你讲创建出你自己的动画效果。
+
+###习题一： 淡入云朵
+在ViewController(译者注：代码中的类ViewController)你有4个outlets： cloud1、cloud2、 cloud3、cloud4 你的任务就是在应用启动的时候将这些云朵淡入出来。
+
+可能有多种方式去实现，下面是一些可以帮助你的基本步骤：
+
+1. 在`viewWillAppear()`里面设置所有云朵的`alpha`的值为"0.0"
+2. 在`viewDidAppear()`里面对云朵调用`animateWithDuration(_:delay:options:animations:completion:)`. 分别将云朵动画持续时间设置成0.5并依次设置delay为0.5s、0.7s、0.9s 以及1.1s。
+3. 在每个animations闭包里面，将云朵的alpah设置成1.0.这个设置将是云朵可见
+
+运行时，可以看到云朵一个接着一个慢慢呈现出来。
+
+![chapter1_15](./images/chapter1_15.png)
+
+基本上所有的元素都有动画效果，处理最后的登录按钮。
+
+![chapter1_16](./images/chapter1_16.png)
+
+不要心急，我们会在下面的章节里面来实现。
+
+![chapter1_17](./images/chapter1_17.png)	
+
