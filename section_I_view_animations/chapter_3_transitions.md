@@ -46,5 +46,23 @@
 		duration: 0.33,		options: [.CurveEaseOut, .TransitionFlipFromBottom], animations: {			self.newView.removeFromSuperview() 
 		}, 
 		completion: nil)
-和前面的例子一样，闭包中的转场动画效果将会作用在“newView”的退出时。		
+和前面的例子一样，闭包中的转场动画效果将会作用在“newView”的退出时。
+
+###隐藏或者展现一个view
+
+![chapter3_03](./images/chapter3_03.png)
+
+到目前为止，你所学的转场动画还只局限在改变view的层级关系上，这也是为什么总是需要一个容器view来表示层级关系。
+
+现在我们来看一个不需要用容器view方式来隐藏和展现一个view。此时，带有转场动画效果的view用其自身作为容器。
+
+下面的代码展示了怎样给隐藏一个子view添加转场动画：
+
+	//hide the view via transition	UIView.transitionWithView(self.newView, duration: 0.33, options: 
+	[.CurveEaseOut, .TransitionFlipFromBottom], animations: {
+			self.newView.hidden = true 
+	}, completion: nil)		
+这里给`transitionWithView(_:duration:options:animations: completion:)`传递的第一个参数表示需要隐藏或者呈现的view。接着只要在动画block里面设置view的"hide"属性即可。
+###用一个view替换另一个view
+![chapter3_04](./images/chapter3_04.png)
 		
