@@ -64,5 +64,37 @@
 	}, completion: nil)		
 这里给`transitionWithView(_:duration:options:animations: completion:)`传递的第一个参数表示需要隐藏或者呈现的view。接着只要在动画block里面设置view的"hide"属性即可。
 ###用一个view替换另一个view
-![chapter3_04](./images/chapter3_04.png)
+![chapter3_04](./images/chapter3_04.png)
+用一个view替换另一个view的操作也非常简单。只要在第一个参数中传递要被替换的view，然后将替换的view传给"toView:" ，如下代码：
+
+	//replace via transition	UIView.transitionFromView(self.oldView!, toView: self.newView!, 
+	duration: 0.33, options: [.TransitionFlipFromTop],	completion: nil)由此可见强大的UIKit可以带来多么丰富的效果。
+在本章中，你学会了一些新的动画效果，比如实践了如何为呈现或者隐藏view添加转场动画。
+##组合转场效果
+现在让我们接着完成“Bahama Air”项目的登录界面。之前我们已经为登录界面创建了一系列的动画了，包括登录表单的跳动、登录按钮按下的效果等。
+
+下面，我们将模拟一些用户鉴权并动态的呈现一些进度信息。当用户点击登录按钮的时候，根据情况依次展示“Connection”，“Authorizing”以及“Failed”。
+
+![chapter3_05](./images/chapter3_05.png)
+
+如果还没有学习完前面的章节，可以从本章的资源文件家中的开始工程（译者注：BahamaAir-Starter目录）。如果你依次完成了前面章节中的练习题，那么恭喜你，可以在你的工程上继续。
+
+打开" ViewController.swift"可以看到“viewDidLoad()”里面的增加了一个类成员变量`status`来保存要隐藏的图片view,接着的代码创建了一个Label兵将其作为子view加载到`status`上。这里将用`status`想用户展示进度信息。要展示的消息存在类成员变量消息数组`messages`中。
+
+在ViewController中添加如下代码：
+
+	func showMessage(index index: Int) { 
+		label.text = messages[index]
+				UIView.transitionWithView(status, duration: 0.33, options: 
+		[.CurveEaseOut, .TransitionCurlDown], animations: {			self.status.hidden = false 
+		}, completion: {_ in			//transition completion		})
+	}这个函数一个`index`参数，通过`index`来决定显示在label上的消息内容。
+接下来在要添加动画效果的view上调用`transitionWithView(_:duration:options:animations: completion:)`。在动画block里面设置`hidden`为`false`可以以转场动画效果显示标语。
+在上面的代码中添加了一个新的动画选项 `.TransitionCurlDown`。这个动画选项的效果是使view就像一摞纸落在地上时效果，效果如下：
+![chapter3_06](./images/chapter3_06.png)
+现在就可以在适当的地方调用上面的`showMessage(index:)`方法了。找到`login()`里面的block:
+	animations: { 
+		self.loginButton.bounds.size.width += 80.0	}, completion: nil)
+	
+这个block是在用户点击登录按钮的时候，让登录按钮弹出来的动画效果的blcok。现在需要在这个闭包中增加一个新的动画闭包，也就是这里的`showMessage(index:)`。
 		
