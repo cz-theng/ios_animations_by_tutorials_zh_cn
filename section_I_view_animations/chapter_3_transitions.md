@@ -96,5 +96,25 @@
 	animations: { 
 		self.loginButton.bounds.size.width += 80.0	}, completion: nil)
 	
-这个block是在用户点击登录按钮的时候，让登录按钮弹出来的动画效果的blcok。现在需要在这个闭包中增加一个新的动画闭包，也就是这里的`showMessage(index:)`。
+这个block是在用户点击登录按钮的时候，让登录按钮弹出来的动画效果的blcok。现在需要在这个闭包中增加一个新的动画闭包，也就是这里的`showMessage(index:)`。将completion参数从nil改变成如下的函数闭包：
+	completion: {_ in 		self.showMessage(index: 0)	}
+这里的闭包接受一个Boolean类型参数，用于标示动画是否是成功执行完之后的的退出了还是中途被取消了而退出。在上面的例子中，我们并不关心动画是否被执行完成了，所以传递一个"_"参数，从而忽略其值。
+在上面的闭包中，通过传递0给`showMessage`来显示消息数组中的第一个元素。
+构建并运行工程，点击登录按钮，这里会看到状态标语里面会显示第一个阶段中的消息：
+
+![chapter3_07](./images/chapter3_07.png)
+
+这里你注意到标语是如何向一摞纸一样卷曲下来的么？这通常是让用户注意到一段静态文字的好方法。
+
+> 注意： 有些动画让人觉得太快了，是不是？有时候需要在一个特定的地方按照一定的顺序显示一个动画，或者仅仅是想动画播的满一点，从而可以好好观察动画的播放过程。
+>
+> 在iPhone模拟其中选择“Debug“-》”Toggle Slow Animations in Frontmost App ”,可以让动画的播放过程慢下来。现在再来看看登录等会是如何展现的。
+
+为了继续下一个动画，，这里首先要保存下标语的初始化位置，这样可以让下一个动画从同样的位置开始播放。
+
+在"ViewController"类中添加如下属性:
+
+	var statusPosition = CGPoint.zero
+
+
 		
