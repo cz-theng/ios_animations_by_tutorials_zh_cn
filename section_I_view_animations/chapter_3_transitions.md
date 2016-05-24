@@ -116,5 +116,23 @@
 
 	var statusPosition = CGPoint.zero
 
+然后将下面保存标语初始位置的代码添加到`viewDidLoad()`中：
+
+	statusPosition = status.center
+	
+现在就可以开始设计一系列的视图动画和转场动画的组合效果了。
+
+将下面的通过标准动画从屏幕上移除状态消息的代码添加上：
+
+	func removeMessage(index index: Int) {		UIView.animateWithDuration(0.33, delay: 0.0, options: [], animations:{			self.status.center.x += self.view.frame.size.width		}, completion: {_ in			self.status.hidden = true self.status.center = self.statusPosition			elf.showMessage(index: index+1) })	}上面的代码，我们看到了之前的老朋友`animateWithDuration(_:delay:options:animations:completion:) `,用来将`status`从屏幕中移动到不可见的区域。
+当`completion`闭包中的动画执行完了之后，将`status`移回到它初始的位置，并将其掩藏不可见，最后再调用`showMessage`并传入下一个提示语的下标。
+
+将标准动画和转场动画组合是非常简单的：只需要调用适当的API，UIKit的中对应的"Core Animation"动画的部分就会在后台帮你实现动画逻辑。
+
+接下来，还需要你用"showMessage"和“removeMessage”完成消息通知链中的其他几条消息的显示，从而模拟一个完整的鉴权过程。
+
+找到`showMessage(index:)`并将其中的注释`//transition completion`替换成下面的代码：
+
+	delay(seconds: 2.0) {		if index < self.messages.count-1 {			self.removeMessage(index: index) 		} else {		//reset form		} 	}
 
 		
