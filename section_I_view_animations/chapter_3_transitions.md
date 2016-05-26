@@ -171,4 +171,24 @@
 可以参考这里列出来的步骤：
 
 1. 创建一个空的"resetForm"函数，并在上面的代码中的注释“//reset”位置调用这个函数。
-2. 在"resetForm"函数中使用`transitionWithView(_:duration:options: animations:completion:)`设置"status"为不可见并居中在"self.statusPosition"。可以给0.2秒的动画持续时间，将"status"还原到了其初始位置。		
+2. 在"resetForm"函数中使用`transitionWithView(_:duration:options: animations:completion:)`设置"status"为不可见并居中在"self.statusPosition"。可以给0.2秒的动画持续时间，将"status"还原到了其初始位置。
+3. 通过使用和显示标语相反动作的动画来掩藏标语，可以使得动画看起来更自然。比如用`.TransitionCurlDown`显示的就用`.TransitionCurlUp`来隐藏。
+再比如`.TransitionFlipFromBottom`的反义词是`.TransitionFlipFromTop`
+4. 下一步，在"restForm()"里面添加`animateWithDuration(_:delay:options: animations:completion:)`的调用，并将如下列表中的动作加入到完成时的闭包中：
+  a. 移动self.spinner: 将登陆按钮中的提示移动到他的初始位置(-20.0, 16.0)
+  b. 将self.spinner的alpha值设置为0.0，从而使其不可见
+  c. 将登陆按钮的背景色调整成其原始的颜色`UIColor(red: 0.63, green: 0.84, blue: 0.35, alpha: 1.0)`
+  d. 继续讲登陆按钮的改变还原成原来的样子，并将`bounds.size.width`设置成80.0
+  e. 最后，将按钮向上移动到密码输入框下方原来的位置，也就是将 center.y 设置成60.0
+  
+如果你对进度条标语完成了所有复原动画，屏幕将会如下显示：
+
+	![chapter3_10](./images/chapter3_10.png)
+	
+好了，我们准备来看终极联系：
+	
+	![chapter3_11](./images/chapter3_11.png)
+	
+###终极练习
+
+		
