@@ -163,7 +163,7 @@
 
 加入你还很难抉择，靠椅考虑我最喜欢的效果`.TransitionFlipFromBottom`。我觉得他用于标语最适合不过了。
 
-	![chapter3_09](./images/chapter3_09.png)
+![chapter3_09](./images/chapter3_09.png)
 
 ### 练习二： 将表单重置成其原始状态
 这个练习目的是要重置所有按过登录按钮后的动画效果，并将表单还原成其初始的状态。这样，当用户登录失败会，再次点击登录按钮后，又能看到和之前一样的动画效果。
@@ -183,11 +183,11 @@
   
 如果你对进度条标语完成了所有复原动画，屏幕将会如下显示：
 
-	![chapter3_10](./images/chapter3_10.png)
+![chapter3_10](./images/chapter3_10.png)
 	
 好了，我们准备来看终极联系：
 	
-	![chapter3_11](./images/chapter3_11.png)
+![chapter3_11](./images/chapter3_11.png)
 	
 ###终极练习
 
