@@ -145,5 +145,30 @@
 ## 练习
 ### 练习一： 选择你最喜欢的转场动画
 到目前为止，你只看到了一种转场动画效果，还想了解其他的转场动画效果么？
-在这个练习中，你可以尝试所有其他可用的转场动画效果，并选择你最喜欢的效果来展现进度条的标语信息。
-		
+在这个练习中，你可以尝试所有其他可用的转场动画效果，并选择你最喜欢的效果来展现进度条的标语信息。
+打开“ViewController.swift”文件然后找到"showMessage(index:)"函数中指定动画效果的".TransitionCurlDown":
+	
+	UIView.transitionWithView(status, duration: 0.33, options: [.CurveEaseOut, .TransitionCurlDown], animations
+	
+将`.TransitionCurlDown`替换成下面列表中的其他转场动画效果，然后构建并运行你的工程观察各自的效果到底是怎样的：
+
+	.TransitionFlipFromLeft 
+	.TransitionFlipFromRight 
+	.TransitionCurlUp 
+	.TransitionCurlDown 
+	.TransitionCrossDissolve 
+	.TransitionFlipFromTop 
+	.TransitionFlipFromBottom
+哪一种效果在屏幕上面表现更好呢？
+
+加入你还很难抉择，靠椅考虑我最喜欢的效果`.TransitionFlipFromBottom`。我觉得他用于标语最适合不过了。
+
+	![chapter3_09](./images/chapter3_09.png)
+
+### 练习二： 将表单重置成其原始状态
+这个练习目的是要重置所有按过登录按钮后的动画效果，并将表单还原成其初始的状态。这样，当用户登录失败会，再次点击登录按钮后，又能看到和之前一样的动画效果。
+
+可以参考这里列出来的步骤：
+
+1. 创建一个空的"resetForm"函数，并在上面的代码中的注释“//reset”位置调用这个函数。
+2. 在"resetForm"函数中使用`transitionWithView(_:duration:options: animations:completion:)`设置"status"为不可见并居中在"self.statusPosition"。可以给0.2秒的动画持续时间，将"status"还原到了其初始位置。		
