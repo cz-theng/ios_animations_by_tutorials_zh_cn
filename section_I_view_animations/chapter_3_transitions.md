@@ -134,5 +134,16 @@
 找到`showMessage(index:)`并将其中的注释`//transition completion`替换成下面的代码：
 
 	delay(seconds: 2.0) {		if index < self.messages.count-1 {			self.removeMessage(index: index) 		} else {		//reset form		} 	}
-
+这样在转场动画完成以后，再等待2.0秒，然后检查是否还有未显示的消息。如果有就调用`removeMessage(index:)` 移除当前消息，接着在`removeMessage(index:)`的完成block中调用`showMessage(index:)`展示新的消息。
+> 注意：函数 `delay(seconds:completion:)` 定义在"ViewController.swift"的开始的地方，用于在延迟一段时间后运行一个block代码。这里我们主要用它来模拟网络上的延迟。
+再次构建并运行你的工程；感受下依次出现的更新认证进度消息的动画：
+
+![chapter3_08](./images/chapter3_08.png)
+
+转场动画是UIKit中唯一可以创建出3D动画效果的工具，所以虽然转场动画很简单但是确实你动画素材工具箱中的重要组成部分。如果想进一步学习更多的3D效果，可以先去查看第四部分的"3D动画"，这一部分将会详细介绍Core Animation和3D 层面的转场动画。
+在进行下一章节的学习之前，请先完成本章的练习题。因为前面已经学习了三章动画相关的内容，这里一个练习肯定满足不了你的好奇心，所以我们准备了三道练习：
+## 练习
+### 练习一： 选择你最喜欢的转场动画
+到目前为止，你只看到了一种转场动画效果，还想了解其他的转场动画效果么？
+在这个练习中，你可以尝试所有其他可用的转场动画效果，并选择你最喜欢的效果来展现进度条的标语信息。
 		
