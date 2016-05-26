@@ -191,4 +191,34 @@
 	
 ###终极练习
 
-		
+设想一下，加入那些背景里面的小云朵缓慢的从屏幕的一侧移动到另一侧，在移动回来，会不会很酷呢？
+
+毫无疑问，效果肯定酷毙了，让我们来完成这个酷毙了的练习。
+
+这四片云朵已经被当成outlets连接到“ViewController”了，所以我们从这里开始。你可以自行发挥想象，来移动云朵，也可以参照如下步骤：
+
+1. 创建一个新的函数`animateCloud(cloud: UIImageView)`并将移动云朵的代码加入其中。
+2. 计算云朵移动的速度，这里假设云朵花费60.0s从屏幕一侧移动到另一侧，那么速度cloudSpeed变量就是` view.frame.size.width/60.0 `(译者注：原文是60.0 / view.frame.size.width 应该算反了)。
+3. 下一步，计算云朵移动到右侧所花费的时间。由于云朵并不一定是出现在屏幕左边的，所以需要用云朵距离屏幕右侧的距离和移动的速度来计算出其需要的时间：`(view.frame.size.width - cloud.frame.origin.x) * cloudSpeed`
+4. 然后用计算出来的时间调用`animateWithDuration(_:delay:options:animation: completion:)`。这里需要用“NSTimeInterval”来创建一个时间变量：`NSTimeInterval(duration)`。"optons"参数使用".CurveLinear"，前面章节中学习的让动画匀速运行的效果。云朵自然的在背景中运行，看上去应该是匀速的变动。
+5. 在动画的闭包表达式中，将"frame.origin.x "设置成“self.view.frame.size.width”从而将云朵移动到屏幕视线外面。
+6. 在动画的完成闭包中，通过设置“frame.origin.x ”为"-cloud.frame.size.width",将云朵移动到其方向的屏幕的外面，别忘啦用"_"忽略闭包中的不需要使用的参数。
+7. 还是在动画完成的闭包里面，调用"animateCloud()"从而使得云朵再次播放动画。
+8. 最后，将下面的代码添加到“viewDidAppear()”从而启动云朵上的动画效果。
+
+	animateCloud(cloud1) 
+	animateCloud(cloud2) 
+	animateCloud(cloud3) 
+	animateCloud(cloud4)
+	
+这个将使得四朵云朵慢慢的移动，从而创建一个动感的画面。
+
+如果你完成了这之前的所有动画，那么恭喜你。
+
+虽然这几章的文字说的非常复杂，但是通这样的过程，你将一个静态登陆表单变成了一个动感十足的登陆界面展现给用户。
+
+![chapter3_12](./images/chapter3_12.png)
+
+是时候将之前所学的所有动画素材归总一下并进行测试了！下一章，你讲组合你所学的所有知识，来给"Bahama Air"应用进行润色。
+
+		
